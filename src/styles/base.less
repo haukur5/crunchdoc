@@ -1,6 +1,23 @@
 @import "./variables/colors.less";
 @import "./variables/screensize.less";
+@import "./main.less";
 
 .example {
 	background-color: @lightBlue;
+}
+
+
+html {
+  min-height: 100%;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: @backgroundColor;
+  color: @textColor;
+  line-height: 1.5;
 }
