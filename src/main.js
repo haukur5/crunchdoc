@@ -1,3 +1,5 @@
+import "./crunch.js";
+
 import { Router } from "./router.js";
 import { renderSidebar } from "./layout/sidebar.js";
 
