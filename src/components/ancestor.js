@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/ancestor", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>ancestor()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const ancestorMethod = createMethodPage({
+  key: "ancestor",
+  path: "/ancestor",
+  label: "ancestor",
+  title: "ancestor()",
+  description: "Finds matching ancestor elements up the DOM tree.",
+  signature: "crunch(selector).ancestor(target)",
+  example: 'crunch(".button").ancestor(".card");',
 });

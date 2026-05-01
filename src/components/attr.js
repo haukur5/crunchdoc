@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/attr", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>attr()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const attrMethod = createMethodPage({
+  key: "attr",
+  path: "/attr",
+  label: "attr",
+  title: "attr()",
+  description: "Gets or sets element attributes.",
+  signature: "crunch(selector).attr(name, value?)",
+  example: 'crunch("img").attr("alt", "Preview image");',
 });

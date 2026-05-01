@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/animate", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>animate()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const animateMethod = createMethodPage({
+  key: "animate",
+  path: "/animate",
+  label: "animate",
+  title: "animate()",
+  description: "Animates CSS properties over time.",
+  signature: "crunch(selector).animate(styles, duration)",
+  example: 'crunch(".box").animate({ opacity: 0.5 }, 300);',
 });

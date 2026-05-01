@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/removeClass", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>removeClass()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const removeClassMethod = createMethodPage({
+  key: "removeClass",
+  path: "/removeClass",
+  label: "removeClass",
+  title: "removeClass()",
+  description: "Removes one or more classes from matched elements.",
+  signature: "crunch(selector).removeClass(className)",
+  example: 'crunch(".card").removeClass("is-selected");',
 });

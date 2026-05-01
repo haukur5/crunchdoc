@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/append", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>append()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const appendMethod = createMethodPage({
+  key: "append",
+  path: "/append",
+  label: "append",
+  title: "append()",
+  description: "Appends content inside each matched element.",
+  signature: "crunch(selector).append(content)",
+  example: 'crunch(".list").append("<li>New item</li>");',
 });

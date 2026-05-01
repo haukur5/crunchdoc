@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/first", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>first()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const firstMethod = createMethodPage({
+  key: "first",
+  path: "/first",
+  label: "first",
+  title: "first()",
+  description: "Returns the first matched element.",
+  signature: "crunch(selector).first()",
+  example: 'crunch(".item").first();',
 });

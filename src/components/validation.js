@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/validation", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>validation()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const validationMethod = createMethodPage({
+  key: "validation",
+  path: "/validation",
+  label: "validation",
+  title: "validation()",
+  description: "Runs validation helpers on inputs and forms.",
+  signature: "crunch(selector).validation(rules)",
+  example: 'crunch("#email").validation({ required: true });',
 });
