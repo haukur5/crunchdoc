@@ -140,7 +140,7 @@ class CrunchResult {
     }
 }
 
-function crunch(selector) {
+export function crunch(selector) {
     const elements = document.querySelectorAll(selector);
     return new CrunchResult(elements);
 }
