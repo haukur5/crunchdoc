@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/on", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>on()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const onMethod = createMethodPage({
+  key: "on",
+  path: "/on",
+  label: "on",
+  title: "on()",
+  description: "Attaches event listeners to matched elements.",
+  signature: "crunch(selector).on(eventName, handler)",
+  example: 'crunch(".btn").on("click", handleClick);',
 });

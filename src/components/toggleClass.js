@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/toggleClass", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>toggleClass()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const toggleClassMethod = createMethodPage({
+  key: "toggleClass",
+  path: "/toggleClass",
+  label: "toggleClass",
+  title: "toggleClass()",
+  description: "Toggles a class on matched elements.",
+  signature: "crunch(selector).toggleClass(className)",
+  example: 'crunch(".card").toggleClass("is-selected");',
 });

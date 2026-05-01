@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/last", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>last()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const lastMethod = createMethodPage({
+  key: "last",
+  path: "/last",
+  label: "last",
+  title: "last()",
+  description: "Returns the last matched element.",
+  signature: "crunch(selector).last()",
+  example: 'crunch(".item").last();',
 });

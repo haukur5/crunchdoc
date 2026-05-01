@@ -1,48 +1,49 @@
-import { Router } from "../router";
+import { crunch } from "../crunch.js";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/addClass", (mount) => {
-  mount.innerHTML = `
-        <section class="method-page">
-            <header class="method-page_header">
-                <h1>addClass()</h1>
-                <p>This method is not yet implemented.</p>
-            </header>
+const DEMO_SELECTOR = '[data-addclass-demo="root"] .demo-card';
 
-            <section class="demo-panel">
-                <div class="demo-panel_header">
-                    <h2> Demo </h2>
+export const addClassMethod = createMethodPage({
+  key: "addClass",
+  path: "/addClass",
+  label: "addClass",
+  title: "addClass()",
+  description: "Adds one or more classes to all matched elements.",
+  signature: "crunch(selector).addClass(className)",
+  example: 'crunch(".demo-card").addClass("is-selected");',
+  demoHtml: `
+    <div class="method-page__demo-grid" data-addclass-demo="root">
+      <div class="method-page__demo-controls">
+        <button class="button" type="button" data-action="run-addclass">Run addClass()</button>
+        <button class="button button--ghost" type="button" data-action="reset-addclass">Reset</button>
+      </div>
 
-                    <section class="code-panel">
-                        <pre><code>crunch(".demo-card").addClass("is-selected");</code></pre>
-                    </section>
+      <div class="method-page__demo-cards">
+        <div class="demo-card">Card 1</div>
+        <div class="demo-card">Card 2</div>
+        <div class="demo-card">Card 3</div>
+      </div>
 
-                    <button class="button" type="button" id="add-class-demo">
-                        Add class
-                    </button>
-                </div>
-            
-                <div class="demo-panel_body">
-                    <div class="demo-card>Card 1</div>
-                    <div class="demo-card>Card 2</div>
-                    <div class="demo-card>Card 3</div>
-                </div>
+      <pre class="method-page__code method-page__demo-output" data-output>Click "Run addClass()" to test.</pre>
+    </div>
+  `,
+  setupDemo(mount) {
+    const runBtn = mount.querySelector('[data-action="run-addclass"]');
+    const resetBtn = mount.querySelector('[data-action="reset-addclass"]');
+    const output = mount.querySelector("[data-output]");
 
-                <pre class="demo-panel_output" id="add-class-output">
-                    Click the button to test addClass()
-                </pre>
-            </section>
+    if (!runBtn || !resetBtn || !output) {
+      return;
+    }
 
-        </section>
-    `;
-
-    const button = mount.querySelector("#add-class-demo");
-    const output = mount.querySelector("#add-class-output");
-
-    button.addEventListener("click",() => {
-        crunch(".demo-card").addClass("is-selected");
-
-        output.textContent = 
-            'Ran: crunch(".demo-card").addClass("is-selected")';
+    runBtn.addEventListener("click", () => {
+      crunch(DEMO_SELECTOR).addClass("is-selected");
+      output.textContent = 'Ran: crunch(".demo-card").addClass("is-selected")';
     });
 
+    resetBtn.addEventListener("click", () => {
+      crunch(DEMO_SELECTOR).removeClass("is-selected");
+      output.textContent = 'Reset: crunch(".demo-card").removeClass("is-selected")';
+    });
+  },
 });

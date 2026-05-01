@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/text", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>text()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const textMethod = createMethodPage({
+  key: "text",
+  path: "/text",
+  label: "text",
+  title: "text()",
+  description: "Gets or sets text content.",
+  signature: "crunch(selector).text(value?)",
+  example: 'crunch(".title").text("Hello Crunch");',
 });

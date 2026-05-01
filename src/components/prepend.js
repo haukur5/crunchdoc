@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/prepend", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>prepend()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const prependMethod = createMethodPage({
+  key: "prepend",
+  path: "/prepend",
+  label: "prepend",
+  title: "prepend()",
+  description: "Prepends content inside each matched element.",
+  signature: "crunch(selector).prepend(content)",
+  example: 'crunch(".list").prepend("<li>First item</li>");',
 });

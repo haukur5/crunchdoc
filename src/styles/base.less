@@ -21,3 +21,70 @@ body {
   color: @textColor;
   line-height: 1.5;
 }
+
+.method-page__demo-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.method-page__demo-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  border: 1px solid @darkBlue;
+  border-radius: 8px;
+  background: @darkBlue;
+  color: #fff;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+}
+
+.button--ghost {
+  background: transparent;
+  color: @darkBlue;
+}
+
+.method-page__demo-cards {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.demo-card {
+  border: 1px solid @darkBlue;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+}
+
+.demo-card.is-selected {
+  background: @darkBlue;
+  color: #fff;
+}
+
+.demo-item {
+  border: 1px solid @darkBlue;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  background: #fff;
+}
+
+/* addClass-only demo styling */
+.method-page--addClass [data-addclass-demo="root"] .demo-card {
+  transition: transform 140ms ease, background-color 140ms ease, color 140ms ease;
+}
+
+.method-page--addClass [data-addclass-demo="root"] .demo-card.is-selected {
+  transform: translateX(6px);
+  background: @darkBlue;
+  color: #fff;
+}
+
+@media @mobile {
+  .method-page--addClass .method-page__demo-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

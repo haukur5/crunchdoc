@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/remove", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>remove()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const removeMethod = createMethodPage({
+  key: "remove",
+  path: "/remove",
+  label: "remove",
+  title: "remove()",
+  description: "Removes matched elements from the DOM.",
+  signature: "crunch(selector).remove()",
+  example: 'crunch(".toast").remove();',
 });

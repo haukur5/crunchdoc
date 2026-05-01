@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/siblings", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>siblings()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const siblingsMethod = createMethodPage({
+  key: "siblings",
+  path: "/siblings",
+  label: "siblings",
+  title: "siblings()",
+  description: "Returns sibling elements for each matched element.",
+  signature: "crunch(selector).siblings()",
+  example: 'crunch(".item.active").siblings();',
 });

@@ -1,10 +1,11 @@
-import { Router } from "../router";
+import { createMethodPage } from "./methodTemplate.js";
 
-Router.register("/crunch", (mount) => {
-  mount.innerHTML = `
-        <section class="hero">
-            <h1>crunch()</h1>
-            <p>This method is not yet implemented.</p>
-        </section>
-    `;
+export const crunchMethod = createMethodPage({
+  key: "crunch",
+  path: "/crunch",
+  label: "crunch",
+  title: "crunch()",
+  description: "Creates a Crunch collection from a selector or element.",
+  signature: "crunch(selector)",
+  example: 'const cards = crunch(".card");',
 });
