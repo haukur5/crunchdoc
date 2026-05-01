@@ -2,9 +2,7 @@ import { renderMethodLinks } from "../components/methodPages.js";
 
 export function renderSidebar() {
   document.getElementById("sidebar").innerHTML = `
-        <div class="library-title">
-            <h2>CrunchJs</h2>
-        </div>
+        <h1>CrunchJS</h1>
         <nav>
             <h2>Getting Started</h2>
             <ul>

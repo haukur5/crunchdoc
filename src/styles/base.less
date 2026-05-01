@@ -1,11 +1,9 @@
 @import "./variables/colors.less";
 @import "./variables/screensize.less";
-@import "./main.less";
 
 .example {
-	background-color: @lightBlue;
+	background-color: @primary-color;
 }
-
 
 html {
   min-height: 100%;
@@ -19,7 +17,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: @backgroundColor;
   color: @textColor;
-  line-height: 1.5;
+  line-height: 1;
 }
 
 .method-page__demo-grid {
@@ -34,7 +32,7 @@ body {
 }
 
 .button {
-  border: 1px solid @darkBlue;
+  border: 1px solid @border-color;
   border-radius: 8px;
   background: @darkBlue;
   color: #fff;

@@ -1,32 +1,354 @@
-@import "./variables/colors.less";
-@import "./variables/screensize.less";
+@import './variables/colors.less';
 
-/* Desktop */
+// Core desktop layout: Grid
 .layout {
-    display: grid;
-	grid-template-columns: 250px auto;
-    grid-template-columns: 1;
-    min-height: 100%;
-    background-color: @lightBlue;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+  background-color: @primary-color;
 }
 
+// Sidebar
 #sidebar {
-	grid-column: 1;
+  grid-column: 1;
+
+  min-height: 100vh;
+  padding: 1.5rem;
+
+  background-color: @darkBlue;
+  color: @sidebarText;
+  border-right: 1px solid fade(@shadow-color, 20%);
 }
 
+// Sidebar logo
+#sidebar .sidebar-logo,
+#sidebar h1 {
+  width: 100%;
+  margin: 0 0 1rem 0;
+  padding: 0.4rem 0;
+
+  background: transparent;
+  border: none;
+  border-radius: 0;
+
+  color: @sidebarText;
+
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+// Sidebar nav
+#sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+#sidebar h1,
+#sidebar h2,
+#sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: @sidebarText;
+}
+
+#sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+#sidebar a {
+  display: block;
+
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+
+  color: fade(@sidebarText, 85%);
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#sidebar a:hover,
+#sidebar a:focus {
+  background-color: fade(@sidebarText, 12%);
+  color: @sidebarText;
+  transform: translateX(4px);
+}
+
+#sidebar a.active {
+  background-color: @backgroundColor;
+  color: @darkBlue;
+  font-weight: 700;
+}
+
+// App area: Flexbox
 #app {
-    //grid-template-rows: 120px 56px auto auto 1fr;
-    grid-column: 2;
+  grid-column: 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  padding: 2rem;
+  overflow-x: hidden;
 }
 
-/* Tablet */
+// Method page
+#app .method-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 
-@media @tablet {
-	display: block;
+  width: 100%;
+  max-width: 950px;
+
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+
+  background-color: @backgroundColor;
+  color: @textColor;
+
+  box-shadow: 0 10px 30px fade(@shadow-color, 10%);
 }
 
-/* Mobile */
+// Page header
+#app .page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 
-@media @mobile {
-	display: block;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid @border-light;
+}
+
+#app .page-header h1 {
+  margin: 0;
+
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: 1;
+
+  color: @border-color;
+}
+
+#app .page-header p {
+  max-width: 700px;
+  margin: 0;
+
+  font-size: 1rem;
+  line-height: 1.4;
+  color: @secondaryText;
+}
+
+// Main method content
+#app .method-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+// Demo section
+#app .demo-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#app .demo-section h2 {
+  margin: 0;
+
+  font-size: 1.4rem;
+  color: @textColor;
+}
+
+#app .demo-section p {
+  margin: 0;
+  color: @secondaryText;
+}
+
+// Demo cards
+#app .demo-card-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+#app .demo-card {
+  flex: 1 1 180px;
+
+  padding: 1.25rem;
+  border: 1px solid @border-light;
+  border-radius: 1rem;
+
+  background-color: @surface-color;
+  color: @textColor;
+
+  box-shadow: 0 6px 16px fade(@shadow-color, 8%);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#app .demo-card:hover {
+  transform: translateY(-3px);
+  border-color: @border-color;
+  box-shadow: 0 8px 20px fade(@shadow-color, 12%);
+}
+
+#app .demo-card.selected {
+  border-color: @border-color;
+  background-color: @selectedBackground;
+}
+
+// Buttons and controls
+#app .demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+#app .button,
+#app button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+  padding: 0.75rem 1.1rem;
+
+  border: none;
+  border-radius: 0.75rem;
+
+  background-color: @border-color;
+  color: @buttonText;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#app .button:hover,
+#app .button:focus,
+#app button:hover,
+#app button:focus {
+  background-color: @buttonHover;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px fade(@shadow-color, 16%);
+}
+
+// Code examples
+#app pre {
+  max-width: 100%;
+  margin: 0;
+  padding: 1rem;
+
+  overflow-x: auto;
+
+  border-radius: 1rem;
+  background-color: @code-background;
+  color: @code-text;
+}
+
+#app code {
+  font-family: Consolas, Monaco, "Courier New", monospace;
+}
+
+// Forms
+#app .demo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  max-width: 420px;
+}
+
+#app .demo-input,
+#app input {
+  padding: 0.75rem 1rem;
+
+  border: 1px solid @border-light;
+  border-radius: 0.75rem;
+
+  background-color: @backgroundColor;
+  color: @textColor;
+}
+
+#app .demo-input:focus,
+#app input:focus {
+  border-color: @border-color;
+  outline: none;
+  box-shadow: 0 0 0 3px fade(@border-color, 18%);
+}
+
+// Results and messages
+#app .demo-result {
+  margin: 0;
+
+  font-weight: 700;
+  color: @border-color;
+}
+
+// Ancestor demo wrapper
+#app .demo-parent {
+  padding: 1.5rem;
+
+  border: 2px dashed @border-light;
+  border-radius: 1rem;
+
+  background-color: @surface-color;
+}
+
+// Tablet and mobile
+@media (max-width: 800px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  #sidebar {
+    grid-column: 1;
+
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1px solid fade(@shadow-color, 20%);
+  }
+
+  #sidebar nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  #sidebar a:hover,
+  #sidebar a:focus {
+    transform: translateY(-2px);
+  }
+
+  #app {
+    grid-column: 1;
+    padding: 1.25rem;
+  }
+
+  #app .method-page {
+    padding: 1.25rem;
+  }
+
+  #app .demo-card-group {
+    flex-direction: column;
+  }
+
+  #app .demo-card {
+    flex: none;
+  }
 }
