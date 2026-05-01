@@ -67,40 +67,40 @@ class CrunchResult {
     }
 
     animate(properties, options = {}) {
-        const duration = options.duration ?? 400;
-        const easing = options.easing ?? 'ease';
-        this.elements.forEach(el => {
-            el.style.transition = `all ${duration}ms ${easing}`;
-            Object.entries(properties).forEach(([key, value]) => {
-                el.style[key] = value;
-            });
-        });
+        const toMs = v => {
+            if (typeof v === 'number') return v;
+            if (typeof v === 'string') {
+                if (v.endsWith('ms')) return parseFloat(v);
+                if (v.endsWith('s')) return parseFloat(v) * 1000;
+                return parseFloat(v) || 0;
+            }
+            return 0;
+        };
+        const animOptions = {
+            duration: options.duration ?? 400,
+            delay: toMs(options.delay ?? 0),
+            easing: options.easing ?? 'ease',
+            iterations: options.iterationCount === 'infinite' ? Infinity : (options.iterationCount ?? 1),
+            fill: options.fillMode ?? 'none',
+        };
+        this.elements.forEach(el => el.animate(properties, animOptions));
         return this;
     }
 
     validation(rules) {
         const errors = {};
-        this.elements.forEach(form => {
-            Object.entries(rules).forEach(([fieldName, fieldRules]) => {
-                const field = form.querySelector(`[name="${fieldName}"]`);
-                if (!field) return;
-                const value = field.value;
-                if (fieldRules.required && !value) {
-                    errors[fieldName] = `${fieldName} is required`;
-                    return;
+        const form = this.elements[0];
+        if (!form) return errors;
+        Object.entries(rules).forEach(([fieldName, validators]) => {
+            const field = form.querySelector(`[name="${fieldName}"]`);
+            if (!field) return;
+            const value = field.value;
+            for (const { message, valid } of validators) {
+                if (!valid(value, form)) {
+                    errors[fieldName] = message;
+                    break;
                 }
-                if (fieldRules.minLength && value.length < fieldRules.minLength) {
-                    errors[fieldName] = `${fieldName} must be at least ${fieldRules.minLength} characters`;
-                    return;
-                }
-                if (fieldRules.maxLength && value.length > fieldRules.maxLength) {
-                    errors[fieldName] = `${fieldName} must be at most ${fieldRules.maxLength} characters`;
-                    return;
-                }
-                if (fieldRules.pattern && !fieldRules.pattern.test(value)) {
-                    errors[fieldName] = `${fieldName} is invalid`;
-                }
-            });
+            }
         });
         return errors;
     }
@@ -129,7 +129,6 @@ class CrunchResult {
 
     remove() {
         this.elements.forEach(el => el.remove());
-        return this;
     }
 
     first() {
