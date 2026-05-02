@@ -1,6 +1,12 @@
 @import './variables/colors.less';
+@import './variables/screensize.less';
 
-// Core desktop layout: Grid
+/* 
+--------------------
+Layout
+--------------------
+*/
+
 .layout {
   display: grid;
   grid-template-columns: 250px 1fr;
@@ -8,7 +14,12 @@
   background-color: @primary-color;
 }
 
-// Sidebar
+/* 
+--------------------
+Sidebar
+--------------------
+*/
+
 #sidebar {
   grid-column: 1;
 
@@ -20,7 +31,6 @@
   border-right: 1px solid fade(@shadow-color, 20%);
 }
 
-// Sidebar logo
 #sidebar .sidebar-logo,
 #sidebar h1 {
   width: 100%;
@@ -39,11 +49,10 @@
   text-transform: uppercase;
 }
 
-// Sidebar nav
 #sidebar nav {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.4rem;
 }
 
 #sidebar h1,
@@ -52,12 +61,6 @@
   margin-top: 0;
   margin-bottom: 1.5rem;
   color: @sidebarText;
-}
-
-#sidebar nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
 }
 
 #sidebar a {
@@ -88,7 +91,12 @@
   font-weight: 700;
 }
 
-// App area: Flexbox
+/* 
+--------------------
+App layout
+--------------------
+*/
+
 #app {
   grid-column: 2;
 
@@ -100,7 +108,12 @@
   overflow-x: hidden;
 }
 
-// Method page
+/* 
+--------------------
+Page structure
+--------------------
+*/
+
 #app .method-page {
   display: flex;
   flex-direction: column;
@@ -118,7 +131,14 @@
   box-shadow: 0 10px 30px fade(@shadow-color, 10%);
 }
 
-// Page header
+article {
+  width: 80%;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
 #app .page-header {
   display: flex;
   flex-direction: column;
@@ -146,14 +166,18 @@
   color: @secondaryText;
 }
 
-// Main method content
 #app .method-content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-// Demo section
+/* 
+--------------------
+Demo sections
+--------------------
+*/
+
 #app .demo-section {
   display: flex;
   flex-direction: column;
@@ -172,8 +196,31 @@
   color: @secondaryText;
 }
 
-// Demo cards
-#app .demo-card-group {
+#app .method-page__demo-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#app .method-page__demo-controls,
+#app .demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+#app .method-page__demo-output {
+  margin-top: 0.5rem;
+}
+
+/* 
+--------------------
+Cards and demo items
+--------------------
+*/
+
+#app .demo-card-group,
+#app .method-page__demo-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -204,17 +251,33 @@
   box-shadow: 0 8px 20px fade(@shadow-color, 12%);
 }
 
-#app .demo-card.selected {
+#app .demo-card.selected,
+#app .demo-card.is-selected {
   border-color: @border-color;
   background-color: @selectedBackground;
 }
 
-// Buttons and controls
-#app .demo-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+#app .demo-item {
+  padding: 0.75rem 1rem;
+
+  border: 1px solid @border-light;
+  border-radius: 0.75rem;
+
+  background-color: @surface-color;
+  color: @textColor;
 }
+
+#app .demo-item.is-selected {
+  background-color: #e0f2fe;
+  border-color: #0284c7;
+  color: #075985;
+}
+
+/* 
+--------------------
+Buttons
+--------------------
+*/
 
 #app .button,
 #app button {
@@ -249,7 +312,23 @@
   box-shadow: 0 8px 18px fade(@shadow-color, 16%);
 }
 
-// Code examples
+#app .button--ghost {
+  background-color: transparent;
+  color: @border-color;
+  border: 1px solid @border-color;
+}
+
+#app .button--ghost:hover,
+#app .button--ghost:focus {
+  background-color: fade(@border-color, 10%);
+}
+
+/* 
+--------------------
+Code, forms, results
+--------------------
+*/
+
 #app pre {
   max-width: 100%;
   margin: 0;
@@ -266,7 +345,6 @@
   font-family: Consolas, Monaco, "Courier New", monospace;
 }
 
-// Forms
 #app .demo-form {
   display: flex;
   flex-direction: column;
@@ -293,7 +371,6 @@
   box-shadow: 0 0 0 3px fade(@border-color, 18%);
 }
 
-// Results and messages
 #app .demo-result {
   margin: 0;
 
@@ -301,7 +378,31 @@
   color: @border-color;
 }
 
-// Ancestor demo wrapper
+/* 
+--------------------
+addClass demo
+--------------------
+*/
+
+#app .method-page--addClass [data-addclass-demo="root"] .demo-card {
+  transition:
+    transform 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease;
+}
+
+#app .method-page--addClass [data-addclass-demo="root"] .demo-card.is-selected {
+  transform: translateX(6px);
+  background: @darkBlue;
+  color: #fff;
+}
+
+/* 
+--------------------
+Ancestor demo
+--------------------
+*/
+
 #app .demo-parent {
   padding: 1.5rem;
 
@@ -311,8 +412,130 @@
   background-color: @surface-color;
 }
 
-// Tablet and mobile
-@media (max-width: 800px) {
+#app .ancestor-demo .demo-box {
+  padding: 1rem;
+  margin-top: 0.75rem;
+
+  border: 2px dashed @border-light;
+  border-radius: 1rem;
+
+  background-color: @surface-color;
+  color: @textColor;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#app .ancestor-demo .level-1 {
+  max-width: 100%;
+}
+
+#app .ancestor-demo .level-2,
+#app .ancestor-demo .level-3 {
+  margin-left: 1rem;
+}
+
+#app .ancestor-demo .demo-target {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+
+  border: 1px solid @border-light;
+  border-radius: 0.75rem;
+
+  background-color: @backgroundColor;
+  color: @textColor;
+  font-weight: 700;
+}
+
+#app .ancestor-demo .demo-box.is-selected {
+  border-color: @border-color;
+  background-color: @selectedBackground;
+  transform: translateY(-2px);
+}
+
+/* 
+--------------------
+Desktop view
+--------------------
+*/
+
+@media @desktop {
+  .layout {
+    grid-template-columns: 250px 1fr;
+  }
+
+  #app {
+    padding: 2rem;
+  }
+
+  #app .method-page {
+    max-width: 950px;
+  }
+
+  article {
+    width: 80%;
+    max-width: 950px;
+    padding: 2rem;
+  }
+
+  #app .demo-card {
+    flex: 1 1 180px;
+  }
+}
+
+/* 
+--------------------
+Tablet view
+--------------------
+*/
+
+@media @tablet {
+  .layout {
+    grid-template-columns: 220px 1fr;
+  }
+
+  #sidebar {
+    padding: 1.25rem;
+  }
+
+  #sidebar .sidebar-logo,
+  #sidebar h1 {
+    font-size: 1.3rem;
+  }
+
+  #sidebar a {
+    padding: 0.65rem 0.85rem;
+  }
+
+  #app {
+    padding: 1.5rem;
+  }
+
+  #app .method-page {
+    max-width: 100%;
+    padding: 1.25rem;
+  }
+
+  article {
+    width: 90%;
+    max-width: 800px;
+    padding: 1.5rem;
+  }
+
+  #app .demo-card {
+    flex: 1 1 220px;
+  }
+}
+
+/* 
+--------------------
+Mobile view
+--------------------
+*/
+
+@media @mobile {
   .layout {
     grid-template-columns: 1fr;
   }
@@ -323,11 +546,41 @@
     min-height: auto;
     border-right: none;
     border-bottom: 1px solid fade(@shadow-color, 20%);
+    padding: 1rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  #sidebar .sidebar-logo {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  #sidebar h1 {
+    flex: 1 1 auto;
+    margin: 0;
   }
 
   #sidebar nav {
-    flex-direction: row;
+    flex: 0 0 100%;
+
+    display: flex;
     flex-wrap: wrap;
+    gap: 0.5rem;
+
+    margin-top: 0.5rem;
+  }
+
+  #sidebar a {
+    display: inline-block;
+    width: auto;
+    padding: 0.55rem 0.8rem;
+
+    font-size: 0.9rem;
+    white-space: nowrap;
   }
 
   #sidebar a:hover,
@@ -337,18 +590,45 @@
 
   #app {
     grid-column: 1;
-    padding: 1.25rem;
+    padding: 1rem;
   }
 
   #app .method-page {
-    padding: 1.25rem;
+    padding: 1rem;
   }
 
-  #app .demo-card-group {
+  article {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  #app .demo-card-group,
+  #app .method-page__demo-cards {
     flex-direction: column;
   }
 
   #app .demo-card {
     flex: none;
+  }
+
+  #app .demo-controls,
+  #app .method-page__demo-controls {
+    flex-direction: column;
+  }
+
+  #app .button,
+  #app button {
+    width: 100%;
+  }
+
+  #app .method-page--addClass .method-page__demo-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #app .ancestor-demo .level-2,
+  #app .ancestor-demo .level-3 {
+    margin-left: 0.5rem;
   }
 }
