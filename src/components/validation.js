@@ -47,7 +47,7 @@ Click "Run validation()" to validate form fields.
           },
           {
             message: "Email format is invalid.",
-            valid: (value) => /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value),
+            valid: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
           },
         ],
         password: [
