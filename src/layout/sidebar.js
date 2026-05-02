@@ -1,8 +1,8 @@
+import { renderMethodLinks } from "../components/methodPages.js";
+
 export function renderSidebar() {
   document.getElementById("sidebar").innerHTML = `
-        <div class="library-title">
-            <h2>CrunchJs</h2>
-        </div>
+        <h1>CrunchJS</h1>
         <nav>
             <h2>Getting Started</h2>
             <ul>
@@ -10,8 +10,10 @@ export function renderSidebar() {
             </ul>
             <h2>Methods</h2>
             <ul>
-                <li><a href="#/example">example</a></li>
+                ${renderMethodLinks()}
             </ul>
+
+
         </nav>
 `;
 }
